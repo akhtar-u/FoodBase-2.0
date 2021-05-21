@@ -26,6 +26,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -39,7 +40,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>foodbase-2.0-aws</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
