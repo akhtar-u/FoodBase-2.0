@@ -19,10 +19,18 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
 
     public List<Recipe> getAllRecipes() throws NotFoundException {
-        if(recipeRepository.findAllByRecipePublicTrue() == null){
+        if (recipeRepository.findAllByRecipePublicTrue() == null) {
             throw new NotFoundException("No recipes found");
         }
 
         return recipeRepository.findAllByRecipePublicTrue();
+    }
+
+    public String delete(String id) throws NotFoundException {
+        if (recipeRepository.findByRecipeID(id).get(0) == null) {
+            throw new NotFoundException("No recipes found");
+        }
+        recipeRepository.deleteById(id);
+        return "Deleted recipe with id: " + id;
     }
 }

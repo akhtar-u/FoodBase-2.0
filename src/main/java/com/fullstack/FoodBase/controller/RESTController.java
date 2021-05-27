@@ -6,10 +6,9 @@ import com.fullstack.FoodBase.model.Recipe;
 import com.fullstack.FoodBase.service.RecipeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,4 +26,9 @@ public class RESTController {
         return ResponseEntity.ok(recipeService.getAllRecipes());
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletePost(@PathVariable String id) throws NotFoundException {
+        log.info("Delete recipe request with id: " + id);
+        return ResponseEntity.ok(recipeService.delete(id));
+    }
 }
