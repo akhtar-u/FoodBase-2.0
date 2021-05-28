@@ -19,16 +19,16 @@ public class RESTController {
 
     private final RecipeService recipeService;
 
-    @GetMapping("/allrecipes")
-    public ResponseEntity<List<Recipe>> browse() throws NotFoundException {
+    @GetMapping("/public")
+    public ResponseEntity<List<Recipe>> getPublicRecipes() throws NotFoundException {
         log.info("Browse page request");
-        return ResponseEntity.ok(recipeService.getAllRecipes());
+        return ResponseEntity.ok(recipeService.getPublicRecipes());
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteRecipe(@PathVariable String id) throws NotFoundException {
         log.info("Delete recipe request with id: " + id);
-        return ResponseEntity.ok(recipeService.delete(id));
+        return ResponseEntity.ok(recipeService.deleteRecipe(id));
     }
 
     @PostMapping("/add")
@@ -42,5 +42,17 @@ public class RESTController {
     public ResponseEntity<String> updateRecipe(@RequestBody Recipe recipe) throws NotFoundException {
         log.info("Updated recipe request with id: " + recipe.getRecipeID());
         return ResponseEntity.ok(recipeService.updateRecipe(recipe));
+    }
+
+    @GetMapping("/get/{username}")
+    public ResponseEntity<List<Recipe>> getRecipesByUser(@PathVariable String username) throws NotFoundException {
+        log.info("Get recipes for user request with username: " + username);
+        return ResponseEntity.ok(recipeService.getRecipeByUser(username));
+    }
+
+    @GetMapping("/recipe/{id}")
+    public ResponseEntity<Recipe> getRecipeByID(@PathVariable String id) throws NotFoundException {
+        log.info("Get recipe by id: " + id);
+        return ResponseEntity.ok(recipeService.getRecipeByID(id));
     }
 }

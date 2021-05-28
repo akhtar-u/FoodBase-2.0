@@ -19,7 +19,7 @@ public class RecipeService {
     @Autowired
     private final RecipeRepository recipeRepository;
 
-    public List<Recipe> getAllRecipes() throws NotFoundException {
+    public List<Recipe> getPublicRecipes() throws NotFoundException {
         if (recipeRepository.findAllByRecipePublicTrue() == null) {
             throw new NotFoundException("No recipes found");
         }
@@ -27,7 +27,7 @@ public class RecipeService {
         return recipeRepository.findAllByRecipePublicTrue();
     }
 
-    public String delete(String id) throws NotFoundException {
+    public String deleteRecipe(String id) throws NotFoundException {
         if (recipeRepository.findByRecipeID(id).get(0) == null) {
             throw new NotFoundException("No recipes found");
         }
@@ -43,6 +43,7 @@ public class RecipeService {
         newRecipe.setRecipeIngredients(recipe.getRecipeIngredients());
         newRecipe.setRecipeInstructions(recipe.getRecipeInstructions());
         newRecipe.setRecipePublic(recipe.isRecipePublic());
+        newRecipe.setUsername("Mark");
 
         recipeRepository.save(newRecipe);
 
@@ -63,5 +64,21 @@ public class RecipeService {
         recipeRepository.save(currentRecipe);
 
         return "Updated recipe with id: " + currentRecipe.getRecipeID();
+    }
+
+    public List<Recipe> getRecipeByUser(String username) throws NotFoundException {
+        if (recipeRepository.findByUsername(username).get(0) == null) {
+            throw new NotFoundException("No recipes found");
+        }
+
+        return recipeRepository.findByUsername(username);
+    }
+
+    public Recipe getRecipeByID(String id) throws NotFoundException {
+        if (recipeRepository.findByRecipeID(id).get(0) == null) {
+            throw new NotFoundException("No recipe found");
+        }
+
+        return recipeRepository.findByRecipeID(id).get(0);
     }
 }

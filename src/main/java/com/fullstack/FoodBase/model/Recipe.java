@@ -15,6 +15,7 @@ public class Recipe {
     private String recipeID;
     private String recipeName;
     private String imageURL;
+    private String username;
     private boolean recipePublic;
     @ElementCollection
     private List<String> recipeIngredients;
