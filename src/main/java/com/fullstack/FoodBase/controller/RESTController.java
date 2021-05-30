@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = {"http://localhost", "https://foodbase.ca"}, maxAge = 3600)
 @RestController
 @Slf4j
 @AllArgsConstructor
