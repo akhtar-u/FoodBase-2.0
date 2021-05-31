@@ -19,11 +19,7 @@ public class RecipeService {
     @Autowired
     private final RecipeRepository recipeRepository;
 
-    public List<Recipe> getPublicRecipes() throws NotFoundException {
-        if (recipeRepository.findAllByRecipePublicTrue() == null) {
-            throw new NotFoundException("No recipes found");
-        }
-
+    public List<Recipe> getPublicRecipes(){
         return recipeRepository.findAllByRecipePublicTrue();
     }
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost", "https://foodbase.ca"}, maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:4200", "https://foodbase.ca"}, maxAge = 3600)
 @RestController
 @Slf4j
 @AllArgsConstructor
@@ -21,7 +21,7 @@ public class RESTController {
     private final RecipeService recipeService;
 
     @GetMapping("/public")
-    public ResponseEntity<List<Recipe>> getPublicRecipes() throws NotFoundException {
+    public ResponseEntity<List<Recipe>> getPublicRecipes(){
         log.info("Browse page request");
         return ResponseEntity.ok(recipeService.getPublicRecipes());
     }
