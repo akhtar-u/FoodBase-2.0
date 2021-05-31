@@ -62,11 +62,7 @@ public class RecipeService {
         return "Updated recipe with id: " + currentRecipe.getRecipeID();
     }
 
-    public List<Recipe> getRecipeByUser(String username) throws NotFoundException {
-        if (recipeRepository.findByUsername(username).get(0) == null) {
-            throw new NotFoundException("No recipes found");
-        }
-
+    public List<Recipe> getRecipeByUser(String username) {
         return recipeRepository.findByUsername(username);
     }
 

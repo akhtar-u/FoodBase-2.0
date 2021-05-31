@@ -21,7 +21,7 @@ public class RESTController {
     private final RecipeService recipeService;
 
     @GetMapping("/public")
-    public ResponseEntity<List<Recipe>> getPublicRecipes(){
+    public ResponseEntity<List<Recipe>> getPublicRecipes() {
         log.info("Browse page request");
         return ResponseEntity.ok(recipeService.getPublicRecipes());
     }
@@ -46,7 +46,7 @@ public class RESTController {
     }
 
     @GetMapping("/get/{username}")
-    public ResponseEntity<List<Recipe>> getRecipesByUser(@PathVariable String username) throws NotFoundException {
+    public ResponseEntity<List<Recipe>> getRecipesByUser(@PathVariable String username) {
         log.info("Get recipes for user request with username: " + username);
         return ResponseEntity.ok(recipeService.getRecipeByUser(username));
     }
