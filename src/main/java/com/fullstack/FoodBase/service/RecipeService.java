@@ -39,7 +39,6 @@ public class RecipeService {
         newRecipe.setRecipeIngredients(recipe.getRecipeIngredients());
         newRecipe.setRecipeInstructions(recipe.getRecipeInstructions());
         newRecipe.setRecipePublic(recipe.isRecipePublic());
-        newRecipe.setUsername("Mark");
 
         recipeRepository.save(newRecipe);
 

@@ -35,7 +35,6 @@ public class RESTController {
     @PostMapping("/add")
     public ResponseEntity<String> addRecipe(@RequestBody Recipe recipe) {
         log.info("Added recipe request with name: " + recipe.getRecipeName());
-
         return ResponseEntity.ok(recipeService.addRecipe(recipe));
     }
 
