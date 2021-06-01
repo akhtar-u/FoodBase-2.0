@@ -36,6 +36,7 @@ public class RecipeService {
         newRecipe.setRecipeID(UUID.randomUUID().toString());
         newRecipe.setRecipeName(recipe.getRecipeName());
         newRecipe.setImageURL(recipe.getImageURL());
+        newRecipe.setUsername(recipe.getUsername());
         newRecipe.setRecipeIngredients(recipe.getRecipeIngredients());
         newRecipe.setRecipeInstructions(recipe.getRecipeInstructions());
         newRecipe.setRecipePublic(recipe.isRecipePublic());
