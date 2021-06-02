@@ -1,6 +1,7 @@
 package com.fullstack.FoodBase.service;
 
 import com.fullstack.FoodBase.exceptions.NotFoundException;
+import com.fullstack.FoodBase.model.Image;
 import com.fullstack.FoodBase.model.Recipe;
 import com.fullstack.FoodBase.repositories.RecipeRepository;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,8 @@ public class RecipeService {
 
     @Autowired
     private final RecipeRepository recipeRepository;
+    @Autowired
+    private final S3Service s3Service;
 
     public List<Recipe> getPublicRecipes(){
         return recipeRepository.findAllByRecipePublicTrue();
@@ -72,5 +75,9 @@ public class RecipeService {
         }
 
         return recipeRepository.findByRecipeID(id).get(0);
+    }
+
+    public String uploadImage(Image image) {
+        return s3Service.uploadFile(image.getImageBase64Data());
     }
 }
