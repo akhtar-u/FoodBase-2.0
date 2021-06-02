@@ -2,7 +2,7 @@ package com.fullstack.FoodBase.service;
 
 import com.fullstack.FoodBase.exceptions.NotFoundException;
 import com.fullstack.FoodBase.model.Recipe;
-import com.fullstack.FoodBase.model.RecipeRepository;
+import com.fullstack.FoodBase.repositories.RecipeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
