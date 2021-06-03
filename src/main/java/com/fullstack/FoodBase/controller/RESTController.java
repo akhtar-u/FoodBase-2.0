@@ -49,10 +49,4 @@ public class RESTController {
         log.info("Get recipes for user request with username: " + username);
         return ResponseEntity.ok(recipeService.getRecipeByUser(username));
     }
-
-    @GetMapping("/recipe/{id}")
-    public ResponseEntity<Recipe> getRecipeByID(@PathVariable String id) throws NotFoundException {
-        log.info("Get recipe by id: " + id);
-        return ResponseEntity.ok(recipeService.getRecipeByID(id));
-    }
 }

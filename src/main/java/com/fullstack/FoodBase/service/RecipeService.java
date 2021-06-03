@@ -68,14 +68,6 @@ public class RecipeService {
         return recipeRepository.findByUsername(username);
     }
 
-    public Recipe getRecipeByID(String id) throws NotFoundException {
-        if (recipeRepository.findByRecipeID(id).get(0) == null) {
-            throw new NotFoundException("No recipe found");
-        }
-
-        return recipeRepository.findByRecipeID(id).get(0);
-    }
-
     private String uploadImage(String imageData) {
         if(imageData.startsWith("data:image")){
             return s3Service.uploadFile(imageData);
