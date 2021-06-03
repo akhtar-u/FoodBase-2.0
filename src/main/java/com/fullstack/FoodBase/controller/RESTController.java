@@ -2,7 +2,9 @@ package com.fullstack.FoodBase.controller;
 
 
 import com.fullstack.FoodBase.exceptions.NotFoundException;
+import com.fullstack.FoodBase.model.Login;
 import com.fullstack.FoodBase.model.Recipe;
+import com.fullstack.FoodBase.model.Register;
 import com.fullstack.FoodBase.service.RecipeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,4 +51,17 @@ public class RESTController {
         log.info("Get recipes for user request with username: " + username);
         return ResponseEntity.ok(recipeService.getRecipeByUser(username));
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@RequestBody Register regiser) {
+        log.info("Registered user with email: " + regiser.getUsername());
+        return ResponseEntity.ok("Logged In!");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestBody Login login) {
+        log.info("Logged in user with email: " + login.getEmail());
+        return ResponseEntity.ok("Logged In!");
+    }
+
 }
