@@ -39,7 +39,7 @@ public class S3Service {
         return getImageURL(uniqueFileName);
     }
 
-    public String getImageURL(String imageKey) {
+    private String getImageURL(String imageKey) {
        return amazonS3.getUrl(bucketName, imageKey).toExternalForm();
     }
 }

@@ -1,7 +1,6 @@
 package com.fullstack.FoodBase.service;
 
 import com.fullstack.FoodBase.exceptions.NotFoundException;
-import com.fullstack.FoodBase.model.Image;
 import com.fullstack.FoodBase.model.Recipe;
 import com.fullstack.FoodBase.repositories.RecipeRepository;
 import lombok.AllArgsConstructor;
@@ -38,7 +37,7 @@ public class RecipeService {
         Recipe newRecipe = new Recipe();
         newRecipe.setRecipeID(UUID.randomUUID().toString());
         newRecipe.setRecipeName(recipe.getRecipeName());
-        newRecipe.setImageURL(recipe.getImageURL());
+        newRecipe.setImageData(uploadImage(recipe.getImageData()));
         newRecipe.setUsername(recipe.getUsername());
         newRecipe.setRecipeIngredients(recipe.getRecipeIngredients());
         newRecipe.setRecipeInstructions(recipe.getRecipeInstructions());
@@ -55,7 +54,7 @@ public class RecipeService {
         }
         Recipe currentRecipe = recipeRepository.findByRecipeID(recipe.getRecipeID()).get(0);
         currentRecipe.setRecipeName(recipe.getRecipeName());
-        currentRecipe.setImageURL(recipe.getImageURL());
+        currentRecipe.setImageData(uploadImage(recipe.getImageData()));
         currentRecipe.setRecipeIngredients(recipe.getRecipeIngredients());
         currentRecipe.setRecipeInstructions(recipe.getRecipeInstructions());
         currentRecipe.setRecipePublic(recipe.isRecipePublic());
@@ -77,7 +76,11 @@ public class RecipeService {
         return recipeRepository.findByRecipeID(id).get(0);
     }
 
-    public String uploadImage(Image image) {
-        return s3Service.uploadFile(image.getImageBase64Data());
+    private String uploadImage(String imageData) {
+        if(imageData.startsWith("data:image")){
+            return s3Service.uploadFile(imageData);
+        }
+
+        return imageData;
     }
 }

@@ -14,7 +14,7 @@ public class Recipe {
     @Id
     private String recipeID;
     private String recipeName;
-    private String imageURL;
+    private String imageData;
     private String username;
     private boolean recipePublic;
     @ElementCollection

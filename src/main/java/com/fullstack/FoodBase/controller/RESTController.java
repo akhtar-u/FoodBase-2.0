@@ -2,7 +2,6 @@ package com.fullstack.FoodBase.controller;
 
 
 import com.fullstack.FoodBase.exceptions.NotFoundException;
-import com.fullstack.FoodBase.model.Image;
 import com.fullstack.FoodBase.model.Recipe;
 import com.fullstack.FoodBase.service.RecipeService;
 import lombok.AllArgsConstructor;
@@ -56,11 +55,4 @@ public class RESTController {
         log.info("Get recipe by id: " + id);
         return ResponseEntity.ok(recipeService.getRecipeByID(id));
     }
-
-    @PostMapping("/image")
-    public ResponseEntity<String> uploadImage(@RequestBody Image image) {
-        log.info("Uploaded image");
-        return ResponseEntity.ok(recipeService.uploadImage(image));
-    }
-
 }
