@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:4200", "https://foodbase.ca", "https://compassionate-jennings-ff1a72.netlify.app/"}, maxAge = 3600)
+@CrossOrigin
 @RestController
 @Slf4j
 @AllArgsConstructor
