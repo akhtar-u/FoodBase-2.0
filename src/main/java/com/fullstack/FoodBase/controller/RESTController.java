@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin
@@ -52,14 +53,14 @@ public class RESTController {
         return ResponseEntity.ok(recipeService.getRecipeByUser(username));
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody Register regiser) {
-        log.info("Registered user with email: " + regiser.getUsername());
+    @PostMapping("/registration")
+    public ResponseEntity<String> registerUser(@RequestBody @Valid Register register) {
+        log.info("Registered user with email: " + register.getUsername());
         return ResponseEntity.ok("Logged In!");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody Login login) {
+    public ResponseEntity<String> loginUser(@RequestBody @Valid Login login) {
         log.info("Logged in user with email: " + login.getEmail());
         return ResponseEntity.ok("Logged In!");
     }
