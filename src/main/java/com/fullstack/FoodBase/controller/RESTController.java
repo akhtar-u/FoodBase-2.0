@@ -55,8 +55,8 @@ public class RESTController {
 
     @PostMapping("/registration")
     public ResponseEntity<String> registerUser(@RequestBody @Valid Register register) {
-        log.info("Registered user with email: " + register.getUsername());
-        return ResponseEntity.ok("Logged In!");
+        log.info("Registered user with username: " + register.getUsername());
+        return ResponseEntity.ok("Registered");
     }
 
     @PostMapping("/login")
