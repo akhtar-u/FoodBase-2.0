@@ -1,6 +1,7 @@
 package com.fullstack.FoodBase.service;
 
 import com.fullstack.FoodBase.exceptions.NotFoundException;
+import com.fullstack.FoodBase.model.IdLessRecipe;
 import com.fullstack.FoodBase.model.Recipe;
 import com.fullstack.FoodBase.repositories.RecipeRepository;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class RecipeService {
     @Autowired
     private final S3Service s3Service;
 
-    public List<Recipe> getPublicRecipes(){
+    public List<IdLessRecipe> getPublicRecipes(){
         return recipeRepository.findAllByRecipePublicTrue();
     }
 

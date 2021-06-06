@@ -2,6 +2,7 @@ package com.fullstack.FoodBase.controller;
 
 
 import com.fullstack.FoodBase.exceptions.NotFoundException;
+import com.fullstack.FoodBase.model.IdLessRecipe;
 import com.fullstack.FoodBase.model.Login;
 import com.fullstack.FoodBase.model.Recipe;
 import com.fullstack.FoodBase.model.Register;
@@ -24,7 +25,7 @@ public class RESTController {
     private final RecipeService recipeService;
 
     @GetMapping("/public")
-    public ResponseEntity<List<Recipe>> getPublicRecipes() {
+    public ResponseEntity<List<IdLessRecipe>> getPublicRecipes() {
         log.info("Browse page request");
         return ResponseEntity.ok(recipeService.getPublicRecipes());
     }
