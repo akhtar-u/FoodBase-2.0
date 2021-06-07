@@ -3,6 +3,8 @@ package com.fullstack.FoodBase.controller;
 
 import com.fullstack.FoodBase.exceptions.NotFoundException;
 import com.fullstack.FoodBase.exceptions.UserAlreadyExistsException;
+import com.fullstack.FoodBase.exceptions.UserNotFoundException;
+import com.fullstack.FoodBase.exceptions.WrongPasswordException;
 import com.fullstack.FoodBase.model.IdLessRecipe;
 import com.fullstack.FoodBase.model.Login;
 import com.fullstack.FoodBase.model.Recipe;
@@ -64,9 +66,9 @@ public class RESTController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody @Valid Login login) {
+    public ResponseEntity<String> loginUser(@RequestBody @Valid Login login) throws UserNotFoundException, WrongPasswordException {
         log.info("Logged in user with email: " + login.getEmail());
-        return ResponseEntity.ok("Logged In!");
+        return ResponseEntity.ok(userService.loginUser(login));
     }
 
 }

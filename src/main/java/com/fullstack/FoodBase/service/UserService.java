@@ -1,6 +1,9 @@
 package com.fullstack.FoodBase.service;
 
 import com.fullstack.FoodBase.exceptions.UserAlreadyExistsException;
+import com.fullstack.FoodBase.exceptions.UserNotFoundException;
+import com.fullstack.FoodBase.exceptions.WrongPasswordException;
+import com.fullstack.FoodBase.model.Login;
 import com.fullstack.FoodBase.model.Register;
 import com.fullstack.FoodBase.model.User;
 import com.fullstack.FoodBase.repositories.UserRepository;
@@ -36,5 +39,16 @@ public class UserService {
         userRepository.save(user);
 
         return "User successfully registered!";
+    }
+
+    public String loginUser(Login login) throws UserNotFoundException, WrongPasswordException {
+        if (userRepository.findByEmail(login.getEmail()) == null) {
+            throw new UserNotFoundException("No user found with email: " + login.getEmail());
+        }
+        if (!passwordEncoder.matches(login.getPassword(), userRepository.findByEmail(login.getEmail()).getPassword())) {
+            throw new WrongPasswordException("Provided password is wrong for user with email: " + login.getEmail());
+        }
+
+        return "User logged in!";
     }
 }
