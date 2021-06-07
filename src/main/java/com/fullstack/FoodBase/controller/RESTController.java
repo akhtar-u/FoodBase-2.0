@@ -2,11 +2,13 @@ package com.fullstack.FoodBase.controller;
 
 
 import com.fullstack.FoodBase.exceptions.NotFoundException;
+import com.fullstack.FoodBase.exceptions.UserAlreadyExistsException;
 import com.fullstack.FoodBase.model.IdLessRecipe;
 import com.fullstack.FoodBase.model.Login;
 import com.fullstack.FoodBase.model.Recipe;
 import com.fullstack.FoodBase.model.Register;
 import com.fullstack.FoodBase.service.RecipeService;
+import com.fullstack.FoodBase.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import java.util.List;
 public class RESTController {
 
     private final RecipeService recipeService;
+    private final UserService userService;
 
     @GetMapping("/public")
     public ResponseEntity<List<IdLessRecipe>> getPublicRecipes() {
@@ -55,9 +58,9 @@ public class RESTController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<String> registerUser(@RequestBody @Valid Register register) {
+    public ResponseEntity<String> registerUser(@RequestBody @Valid Register register) throws UserAlreadyExistsException {
         log.info("Registered user with username: " + register.getUsername());
-        return ResponseEntity.ok("Registered");
+        return ResponseEntity.ok(userService.registerNewUser(register));
     }
 
     @PostMapping("/login")
