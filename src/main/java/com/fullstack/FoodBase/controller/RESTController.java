@@ -65,10 +65,10 @@ public class RESTController {
         return ResponseEntity.ok(userService.registerNewUser(register));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody @Valid Login login) throws UserNotFoundException, WrongPasswordException {
-        log.info("Logged in user with email: " + login.getUsername());
-        return ResponseEntity.ok(userService.loginUser(login));
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<String> loginUser(@RequestBody @Valid Login login) throws UserNotFoundException, WrongPasswordException {
+//        log.info("Logged in user with email: " + login.getUsername());
+//        return ResponseEntity.ok(userService.loginUser(login));
+//    }
 
 }

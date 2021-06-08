@@ -9,6 +9,9 @@ import com.fullstack.FoodBase.model.User;
 import com.fullstack.FoodBase.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,7 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 @AllArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private final UserRepository userRepository;
@@ -50,5 +53,15 @@ public class UserService {
         }
 
         return "User logged in!";
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findById(username).orElse(null);
+
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new MyUserPrincipal(user);
     }
 }
