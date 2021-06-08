@@ -44,17 +44,6 @@ public class UserService implements UserDetailsService {
         return "User successfully registered!";
     }
 
-    public String loginUser(Login login) throws UserNotFoundException, WrongPasswordException {
-        if (userRepository.findById(login.getUsername()).isPresent()) {
-            throw new UserNotFoundException("No user found with username: " + login.getUsername());
-        }
-        if (bCryptPasswordEncoder.matches(login.getPassword(), userRepository.findByEmail(login.getUsername()).getPassword())) {
-            throw new WrongPasswordException("Provided password is wrong for user with email: " + login.getUsername());
-        }
-
-        return "User logged in!";
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findById(username).orElse(null);

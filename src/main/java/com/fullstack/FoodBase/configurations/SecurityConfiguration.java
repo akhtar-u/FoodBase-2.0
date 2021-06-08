@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll()
-//                .antMatchers(HttpMethod.GET, "/database/public").permitAll()
+                .antMatchers(HttpMethod.GET, "/database/public").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
@@ -55,11 +55,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         return source;
     }
-
-//    @Override
-//    protected void configure(HttpSecurity security) throws Exception {
-//        security.httpBasic().disable().formLogin().disable();
-//        /* comment out for production */
-//        security.csrf().disable();
-//    }
 }
