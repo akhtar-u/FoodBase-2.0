@@ -13,7 +13,7 @@ public class Login {
     @ValidEmail
     @NotNull
     @NotBlank
-    private String email;
+    private String username;
 
     @NotNull
     @NotBlank

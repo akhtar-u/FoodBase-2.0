@@ -67,7 +67,7 @@ public class RESTController {
 
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody @Valid Login login) throws UserNotFoundException, WrongPasswordException {
-        log.info("Logged in user with email: " + login.getEmail());
+        log.info("Logged in user with email: " + login.getUsername());
         return ResponseEntity.ok(userService.loginUser(login));
     }
 

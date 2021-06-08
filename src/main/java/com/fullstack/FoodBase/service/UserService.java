@@ -42,11 +42,11 @@ public class UserService {
     }
 
     public String loginUser(Login login) throws UserNotFoundException, WrongPasswordException {
-        if (userRepository.findByEmail(login.getEmail()) == null) {
-            throw new UserNotFoundException("No user found with email: " + login.getEmail());
+        if (userRepository.findByEmail(login.getUsername()) == null) {
+            throw new UserNotFoundException("No user found with email: " + login.getUsername());
         }
-        if (!passwordEncoder.matches(login.getPassword(), userRepository.findByEmail(login.getEmail()).getPassword())) {
-            throw new WrongPasswordException("Provided password is wrong for user with email: " + login.getEmail());
+        if (!passwordEncoder.matches(login.getPassword(), userRepository.findByEmail(login.getUsername()).getPassword())) {
+            throw new WrongPasswordException("Provided password is wrong for user with email: " + login.getUsername());
         }
 
         return "User logged in!";
