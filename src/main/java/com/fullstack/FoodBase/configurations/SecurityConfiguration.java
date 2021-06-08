@@ -18,9 +18,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         /* comment out for production */
         security.csrf().disable();
     }
-
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(11);
-    }
 }

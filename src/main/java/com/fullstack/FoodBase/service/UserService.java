@@ -9,7 +9,7 @@ import com.fullstack.FoodBase.model.User;
 import com.fullstack.FoodBase.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,7 +22,7 @@ public class UserService {
     @Autowired
     private final UserRepository userRepository;
     @Autowired
-    private final PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public String registerNewUser(Register register) throws UserAlreadyExistsException {
         if (userRepository.findById(register.getUsername()).isPresent()) {
@@ -35,17 +35,17 @@ public class UserService {
         User user = new User();
         user.setUsername(register.getUsername());
         user.setEmail(register.getEmail());
-        user.setPassword(passwordEncoder.encode(register.getPassword()));
+        user.setPassword(bCryptPasswordEncoder.encode(register.getPassword()));
         userRepository.save(user);
 
         return "User successfully registered!";
     }
 
     public String loginUser(Login login) throws UserNotFoundException, WrongPasswordException {
-        if (userRepository.findByEmail(login.getUsername()) == null) {
-            throw new UserNotFoundException("No user found with email: " + login.getUsername());
+        if (userRepository.findById(login.getUsername()).isPresent()) {
+            throw new UserNotFoundException("No user found with username: " + login.getUsername());
         }
-        if (!passwordEncoder.matches(login.getPassword(), userRepository.findByEmail(login.getUsername()).getPassword())) {
+        if (bCryptPasswordEncoder.matches(login.getPassword(), userRepository.findByEmail(login.getUsername()).getPassword())) {
             throw new WrongPasswordException("Provided password is wrong for user with email: " + login.getUsername());
         }
 
