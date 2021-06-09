@@ -1,9 +1,9 @@
 package com.fullstack.FoodBase.exceptions;
 
-public class WrongPasswordException extends Exception {
+public class JWTUsernameException extends Exception {
     private final String message;
 
-    public WrongPasswordException(String message) {
+    public JWTUsernameException(String message) {
         this.message = message;
     }
 

@@ -1,7 +1,7 @@
 package com.fullstack.FoodBase.exceptions;
 
 public class UserAlreadyExistsException extends Exception {
-    private String message;
+    private final String message;
 
     public UserAlreadyExistsException(String message) {
         this.message = message;

@@ -5,6 +5,7 @@ import com.fullstack.FoodBase.exceptions.UserNotFoundException;
 import com.fullstack.FoodBase.exceptions.WrongPasswordException;
 import com.fullstack.FoodBase.model.Login;
 import com.fullstack.FoodBase.model.Register;
+import com.fullstack.FoodBase.model.SuccessResponse;
 import com.fullstack.FoodBase.model.User;
 import com.fullstack.FoodBase.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public String registerNewUser(Register register) throws UserAlreadyExistsException {
+    public SuccessResponse registerNewUser(Register register) throws UserAlreadyExistsException {
         if (userRepository.findById(register.getUsername()).isPresent()) {
             throw new UserAlreadyExistsException("User with username: " + register.getUsername() + " already exists!");
         }
@@ -41,7 +42,10 @@ public class UserService implements UserDetailsService {
         user.setPassword(bCryptPasswordEncoder.encode(register.getPassword()));
         userRepository.save(user);
 
-        return "User successfully registered!";
+        SuccessResponse response = new SuccessResponse();
+        response.setMessage("Registration successful!");
+
+        return response;
     }
 
     @Override

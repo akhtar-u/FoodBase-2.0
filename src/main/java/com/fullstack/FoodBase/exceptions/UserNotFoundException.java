@@ -1,7 +1,7 @@
 package com.fullstack.FoodBase.exceptions;
 
 public class UserNotFoundException extends Exception {
-    private String message;
+    private final String message;
 
     public UserNotFoundException(String message) {
         this.message = message;
